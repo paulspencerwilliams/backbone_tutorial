@@ -2,7 +2,7 @@ var ApplicationRouter = Backbone.Router.extend({
     initialize: function(el) {
         this.el = el;
 		this.addressBook = new AddressBook;
-        this.listView = new ContentView('#list', this.addressBook);
+        this.listView = new AddressBookView(this.addressBook);
 
 
 		var paul = new Contact;
@@ -57,12 +57,12 @@ Backbone.View = Backbone.View.extend({
     }
 });
 
-var ContentView = Backbone.View.extend({
+var AddressBookView = Backbone.View.extend({
     /*
 	 * Initialize with the template-id
 	 */
-    initialize: function(view, addressBook) {
-        this.view = view;
+    initialize: function(addressBook) {
+
 		this.addressBook = addressBook;
     },
 
@@ -74,7 +74,7 @@ var ContentView = Backbone.View.extend({
             addressBook: this.addressBook
         };
 		
-		var template = _.template($(this.view).html(), variables);
+		var template = _.template($('#list').html(), variables);
 		$(this.el).html(template);
 
         return this;
