@@ -28,16 +28,32 @@
 
 
 <script type="text/template" id="list">
-<table id="contacts">
-	<tbody>
-	</tbody>
-<table>
+	<table>
+		<thead>
+			<tr>
+				<th>First name</th>
+				<th>Second name</th>
+			</tr>
+		</thead>
+
+	<% _.each(addressBook.models, function(contact) { %> 
+		<thead>
+			<tr>
+				<td><%= contact.name %></td>
+				<td><%= contact.name %></td>				
+			</tr>
+		</thead>
+	<% }); %>	
+	</table>
 <a href="#add">Add a contact</a>	
 </script>
 
 <script type="text/javascript">
 	var router = new ApplicationRouter($('#content'));
 	Backbone.history.start();
+	
+	
+	
 </script>
 
 </body>
