@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>hello-backbonejs</title>
+<link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  
+<script src="scripts/jquery-1.7.1.min.js"></script>
+<script src="scripts/json2.js"></script>
+<script src="scripts/underscore-min.js"></script>
+<script src="scripts/backbone-min.js"></script>
+<script src="scripts/application.js"></script>
+
+</head>
+<body>
+
+
+
+		<div id="content" class="content">
+			<!-- Content div that is filled by the router -->
+		</div>
+
+		<footer>
+
+		</footer>
+
+
+
+
+<script type="text/template" id="list">
+<table id="contacts">
+	<tbody>
+	</tbody>
+<table>
+<a href="#add">Add a contact</a>	
+</script>
+
+<script type="text/javascript">
+	var router = new ApplicationRouter($('#content'));
+	Backbone.history.start();
+</script>
+
+</body>
+
+</html>
