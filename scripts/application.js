@@ -1,17 +1,18 @@
 var ApplicationRouter = Backbone.Router.extend({
     initialize: function(el) {
         this.el = el;
-		this.addressBook = new AddressBook;
+        this.addressBook = new AddressBook;
         this.listView = new AddressBookView(this.addressBook);
+        this.addView = new AddView(this.addressBook);
 
 
-		var paul = new Contact;
-		paul.name = "Paul";
-		this.addressBook.add(paul);
-		
-		var james = new Contact;
-		james.name = "James";
-		this.addressBook.add(james);
+        var paul = new Contact;
+        paul.name = "Paul";
+        this.addressBook.add(paul);
+
+        var james = new Contact;
+        james.name = "James";
+        this.addressBook.add(james);
     },
 
     routes: {
@@ -23,27 +24,17 @@ var ApplicationRouter = Backbone.Router.extend({
 
     switchView: function(view) {
         if (this.currentView) {
-            // Detach the old view
             this.currentView.remove();
         }
-
-        // Move the view element into the DOM (replacing the old content)
         this.el.html(view.el);
-
-        // Render view after it is in the DOM (styles are applied)
         view.render();
-
         this.currentView = view;
     },
-
-
-
     list: function() {
         this.switchView(this.listView);
     },
-
     add: function() {
-        alert('adding');
+        this.switchView(this.addView);
     }
 });
 
@@ -52,33 +43,50 @@ Backbone.View = Backbone.View.extend({
     remove: function() {
         // Empty the element and remove it from the DOM while preserving events
         $(this.el).empty().detach();
-
         return this;
     }
 });
 
 var AddressBookView = Backbone.View.extend({
-    /*
-	 * Initialize with the template-id
-	 */
     initialize: function(addressBook) {
 
-		this.addressBook = addressBook;
+        this.addressBook = addressBook;
     },
-
-    /*
-	 * Get the template content and render it into a new div-element
-	 */
     render: function() {
-		var variables = {
+        var variables = {
             addressBook: this.addressBook
         };
-		
-		var template = _.template($('#list').html(), variables);
-		$(this.el).html(template);
 
+        var template = _.template($('#listTemplate').html(), variables);
+        $(this.el).html(template);
         return this;
+    }
+});
 
+var AddView = Backbone.View.extend({
+    events: {
+        "submit #addForm": "handleNewContact"
+    },
+    initialize: function(addressBook) {
+
+        this.addressBook = addressBook;
+    },
+
+    handleNewContact: function(data) {
+
+        var inputField = $('input[name=name]');
+
+        var newContact = new Contact;
+        newContact.name = inputField.val();
+        this.addressBook.add(newContact);
+
+        inputField.val('');
+    },
+
+    render: function() {
+        var template = _.template($('#addTemplate').html());
+        $(this.el).html(template);
+        return this;
     }
 });
 
@@ -89,10 +97,7 @@ var AddressBook = Backbone.Collection.extend({
 });
 
 var Contact = Backbone.Model.extend({
-    initialize: function() {
 
-
-        }
 });
 
 
