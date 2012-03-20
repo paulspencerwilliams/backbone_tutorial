@@ -27,7 +27,7 @@
 
 
 
-<script type="text/template" id="list">
+<script type="text/template" id="listTemplate">
 	<table>
 		<thead>
 			<tr>
@@ -46,6 +46,14 @@
 	<% }); %>	
 	</table>
 <a href="#add">Add a contact</a>	
+</script>
+
+
+<script type="text/template" id="addTemplate">
+	<form method="post" action="#" id= 'addForm' onsubmit="return false">
+        <input name='name' type="text" />
+        <input type="submit" value='Add'/>
+      </form>
 </script>
 
 <script type="text/javascript">
