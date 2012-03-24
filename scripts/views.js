@@ -42,6 +42,7 @@ var AddView = Backbone.View.extend({
         newContact.name = inputField.val();
         this.addressBook.add(newContact);
 
+
         inputField.val('');
 		router.navigate('', true);
     },

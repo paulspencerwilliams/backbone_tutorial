@@ -1,5 +1,8 @@
+
+
 var AddressBook = Backbone.Collection.extend({
-    model: Contact
+    model: Contact, 
+	localStorage: new Store("addressBook")
 	// url: http://theserver.com/api/AddressBook
 });
 
