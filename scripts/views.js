@@ -30,7 +30,7 @@ var AddressBookView = Backbone.View.extend({
 
 var ContactView = Backbone.View.extend( {
 	initialize: function (){
-		this.model.bind('remove', this.unrender);
+		this.model.bind('destroy', this.unrender);
 	},
 	events: {
 		"click .delete": "remove"
@@ -46,6 +46,7 @@ var ContactView = Backbone.View.extend( {
 	},
 	unrender: function () {
 		$(this.el).remove();
+
 	}
 });
 
