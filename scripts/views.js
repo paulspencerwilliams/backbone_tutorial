@@ -40,7 +40,7 @@ var AddView = Backbone.View.extend({
 
         var newContact = new Contact;
         newContact.name = inputField.val();
-        this.addressBook.add(newContact);
+        this.addressBook.create(newContact);
 
 
         inputField.val('');
