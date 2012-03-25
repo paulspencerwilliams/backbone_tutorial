@@ -28,7 +28,9 @@ var AddressBookView = Backbone.View.extend({
 
 var AddView = Backbone.View.extend({
     events: {
-        "submit #addForm": "handleNewContact"
+        "submit #addForm": "handleNewContact",
+		"click #cancel": "cancelNewContact"
+		
     },
     initialize: function(addressBook) {
 
@@ -44,6 +46,13 @@ var AddView = Backbone.View.extend({
         this.addressBook.create(newContact);
 
 
+        firstnameField.val('');
+        lastnameField.val('');
+		router.navigate('', true);
+    },
+    cancelNewContact: function(data) {
+        var firstnameField = $('input[name=firstname]');
+        var lastnameField = $('input[name=lastname]');
         firstnameField.val('');
         lastnameField.val('');
 		router.navigate('', true);

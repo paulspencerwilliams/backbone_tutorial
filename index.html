@@ -55,18 +55,18 @@
 
 <script type="text/template" id="addTemplate">
 	<form method="post" action="#" id= 'addForm' onsubmit="return false">
-    	<input name='firstname' type="text" />
-    	<input name='lastname' type="text" />
+		<label for="firstname">First name</label>
+    	<input id="firstname" name='firstname' type="text" /><br />
+		<label for="lastname">Last name</label>
+    	<input id="lastname" name='lastname' type="text" /><br />
         <input type="submit" value='Add'/>
+		<input id="cancel" type="button" value="Cancel" />
       </form>
 </script>
 
 <script type="text/javascript">
 	var router = new ApplicationRouter($('#content'));
 	Backbone.history.start();
-	
-	
-	
 </script>
 
 </body>
