@@ -38,16 +38,7 @@
 				<th>First name</th>
 				<th>Second name</th>
 			</tr>
-		</thead>
-
-	<% _.each(addressBook.models, function(contact) { %> 
-		<thead>
-			<tr>
-				<td><%= contact.get("firstname") %></td>
-				<td><%= contact.get("lastname") %></td>				
-			</tr>
-		</thead>
-	<% }); %>	
+		</thead>	
 	</table>
 <a href="#add">Add a contact</a>	
 </script>
@@ -63,6 +54,15 @@
 		<input id="cancel" type="button" value="Cancel" />
       </form>
 </script>
+
+<script type="text/template" id="contactTemplate">
+	<tr>
+		<td><%= firstname %></td>
+		<td><%= lastname %></td>
+		<td><button class="delete">delete</button></td>
+	</tr>
+</script>
+
 
 <script type="text/javascript">
 	var router = new ApplicationRouter($('#content'));

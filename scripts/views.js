@@ -11,20 +11,44 @@ Backbone.View = Backbone.View.extend({
 
 var AddressBookView = Backbone.View.extend({
     initialize: function(addressBook) {
-
         this.addressBook = addressBook;
-    },
-    render: function() {
-        var variables = {
-            addressBook: this.addressBook
-        };
-		
 
-        var template = _.template($('#listTemplate').html(), variables);
+    },
+	renderContact: function (model) {
+		
+		var contactView = new ContactView({model: model});
+		contactView.render();
+		$('table').append(contactView.el);
+	},
+    render: function() {
+		var template = _.template($('#listTemplate').html());
         $(this.el).html(template);
+		this.addressBook.each(this.renderContact);
         return this;
     }
 });
+
+var ContactView = Backbone.View.extend( {
+	initialize: function (){
+		this.model.bind('remove', this.unrender);
+	},
+	events: {
+		"click .delete": "remove"
+    },
+	remove : function () {
+		this.model.destroy();
+		this.unrender();
+	},
+	render: function () {
+		var template = _.template($('#contactTemplate').html(), this.model.toJSON());
+		$(this.el).html(template);
+		return this;
+	},
+	unrender: function () {
+		$(this.el).remove();
+	}
+});
+
 
 var AddView = Backbone.View.extend({
     events: {
