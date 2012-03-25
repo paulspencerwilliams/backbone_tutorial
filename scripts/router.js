@@ -4,7 +4,7 @@ var ApplicationRouter = Backbone.Router.extend({
         this.addressBook = new AddressBook;
         this.listView = new AddressBookView(this.addressBook);
         this.addView = new AddView(this.addressBook);
-		this.addressBook.fetch();
+        this.addressBook.fetch();
     },
 
     routes: {

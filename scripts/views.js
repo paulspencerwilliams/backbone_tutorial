@@ -1,4 +1,3 @@
-
 // Override View.remove()'s default behavior
 Backbone.View = Backbone.View.extend({
     remove: function() {
@@ -13,51 +12,49 @@ var AddressBookView = Backbone.View.extend({
         this.addressBook = addressBook;
 
     },
-	renderContact: function (model) {
-		
-		var contactView = new ContactView({model: model});
-		contactView.render();
-		$('table').append(contactView.el);
-	},
+    renderContact: function(model) {
+
+        var contactView = new ContactView({
+            model: model
+        });
+        contactView.render();
+        $('tbody').append(contactView.el);
+    },
     render: function() {
-		var template = _.template($('#listTemplate').html());
+        var template = _.template($('#listTemplate').html());
         $(this.el).html(template);
-		this.addressBook.each(this.renderContact);
+        this.addressBook.each(this.renderContact);
         return this;
     }
 });
 
-var ContactView = Backbone.View.extend( {
-	// Several problems here. You were overwriting the Backbone.view.remove() method. 
-	// Also, the bind method sometimes needs a third arguement (the context).
-	// You're making good progress. If you haven't already, now would be a good time to 
-	// read through the Backbone documentation. It'll probably set off some lightbulbs for you, 
-	// and it'll be an hour well spent.
-	initialize: function (){
-		this.model.bind('destroy', this.remove, this);
-	},
-	
-	events: {
-		"click .delete": "onDeleteClicked"
-    	},
-	
-	render: function () {
-		var template = _.template($('#contactTemplate').html(), this.model.toJSON());
-		$(this.el).html(template);
-		return this;
-	},
-	
-	onDeleteClicked: function () {
-        	this.model.destroy();
-    	}
+var ContactView = Backbone.View.extend({
+	tagName: 'tr',
+    initialize: function() {
+        this.model.bind('destroy', this.remove, this);
+    },
+
+    events: {
+        "click .delete": "onDeleteClicked"
+    },
+
+    render: function() {
+        var template = _.template($('#contactTemplate').html(), this.model.toJSON());
+        $(this.el).html(template);
+        return this;
+    },
+
+    onDeleteClicked: function() {
+        this.model.destroy();
+    }
 });
 
 
 var AddView = Backbone.View.extend({
     events: {
         "submit #addForm": "handleNewContact",
-		"click #cancel": "cancelNewContact"
-		
+        "click #cancel": "cancelNewContact"
+
     },
     initialize: function(addressBook) {
 
@@ -68,21 +65,24 @@ var AddView = Backbone.View.extend({
 
         var firstnameField = $('input[name=firstname]');
         var lastnameField = $('input[name=lastname]');
-        var newContact = new Contact ({firstname: firstnameField.val(), lastname: lastnameField.val()});
-			
+        var newContact = new Contact({
+            firstname: firstnameField.val(),
+            lastname: lastnameField.val()
+        });
+
         this.addressBook.create(newContact);
 
 
         firstnameField.val('');
         lastnameField.val('');
-		router.navigate('', true);
+        router.navigate('', true);
     },
     cancelNewContact: function(data) {
         var firstnameField = $('input[name=firstname]');
         var lastnameField = $('input[name=lastname]');
         firstnameField.val('');
         lastnameField.val('');
-		router.navigate('', true);
+        router.navigate('', true);
     },
 
     render: function() {

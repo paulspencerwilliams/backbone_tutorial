@@ -37,8 +37,11 @@
 			<tr>
 				<th>First name</th>
 				<th>Second name</th>
+				<th></th>
 			</tr>
 		</thead>	
+		<tbody>
+		</tbody>		
 	</table>
 <a href="#add">Add a contact</a>	
 </script>
@@ -56,11 +59,9 @@
 </script>
 
 <script type="text/template" id="contactTemplate">
-	<tr>
 		<td><%= firstname %></td>
 		<td><%= lastname %></td>
 		<td><button class="delete">delete</button></td>
-	</tr>
 </script>
 
 
@@ -68,7 +69,6 @@
 	var router = new ApplicationRouter($('#content'));
 	Backbone.history.start();
 </script>
-
 </body>
 
 </html>
