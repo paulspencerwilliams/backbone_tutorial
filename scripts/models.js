@@ -1,4 +1,6 @@
+var Contact = Backbone.Model.extend({
 
+});
 
 var AddressBook = Backbone.Collection.extend({
     model: Contact, 
@@ -6,6 +8,3 @@ var AddressBook = Backbone.Collection.extend({
 	// url: http://theserver.com/api/AddressBook
 });
 
-var Contact = Backbone.Model.extend({
-
-});

@@ -43,8 +43,8 @@
 	<% _.each(addressBook.models, function(contact) { %> 
 		<thead>
 			<tr>
-				<td><%= contact.name %></td>
-				<td><%= contact.name %></td>				
+				<td><%= contact.get("firstname") %></td>
+				<td><%= contact.get("lastname") %></td>				
 			</tr>
 		</thead>
 	<% }); %>	
@@ -55,7 +55,8 @@
 
 <script type="text/template" id="addTemplate">
 	<form method="post" action="#" id= 'addForm' onsubmit="return false">
-        <input name='name' type="text" />
+    	<input name='firstname' type="text" />
+    	<input name='lastname' type="text" />
         <input type="submit" value='Add'/>
       </form>
 </script>

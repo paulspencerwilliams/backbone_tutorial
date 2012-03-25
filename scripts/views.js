@@ -18,6 +18,7 @@ var AddressBookView = Backbone.View.extend({
         var variables = {
             addressBook: this.addressBook
         };
+		
 
         var template = _.template($('#listTemplate').html(), variables);
         $(this.el).html(template);
@@ -36,14 +37,15 @@ var AddView = Backbone.View.extend({
 
     handleNewContact: function(data) {
 
-        var inputField = $('input[name=name]');
-
-        var newContact = new Contact;
-        newContact.name = inputField.val();
+        var firstnameField = $('input[name=firstname]');
+        var lastnameField = $('input[name=lastname]');
+        var newContact = new Contact ({firstname: firstnameField.val(), lastname: lastnameField.val()});
+			
         this.addressBook.create(newContact);
 
 
-        inputField.val('');
+        firstnameField.val('');
+        lastnameField.val('');
 		router.navigate('', true);
     },
 
