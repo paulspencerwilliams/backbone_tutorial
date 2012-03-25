@@ -1,5 +1,4 @@
 
-
 // Override View.remove()'s default behavior
 Backbone.View = Backbone.View.extend({
     remove: function() {
@@ -29,25 +28,28 @@ var AddressBookView = Backbone.View.extend({
 });
 
 var ContactView = Backbone.View.extend( {
+	// Several problems here. You were overwriting the Backbone.view.remove() method. 
+	// Also, the bind method sometimes needs a third arguement (the context).
+	// You're making good progress. If you haven't already, now would be a good time to 
+	// read through the Backbone documentation. It'll probably set off some lightbulbs for you, 
+	// and it'll be an hour well spent.
 	initialize: function (){
-		this.model.bind('destroy', this.unrender);
+		this.model.bind('destroy', this.remove, this);
 	},
+	
 	events: {
-		"click .delete": "remove"
-    },
-	remove : function () {
-		this.model.destroy();
-		this.unrender();
-	},
+		"click .delete": "onDeleteClicked"
+    	},
+	
 	render: function () {
 		var template = _.template($('#contactTemplate').html(), this.model.toJSON());
 		$(this.el).html(template);
 		return this;
 	},
-	unrender: function () {
-		$(this.el).remove();
-
-	}
+	
+	onDeleteClicked: function () {
+        	this.model.destroy();
+    	}
 });
 
 
